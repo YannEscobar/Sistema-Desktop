@@ -1,6 +1,6 @@
-#   Sistema para Portfólio Acadêmico
+#   Sistema Desktop integrado com Web
 ###
-Um repositório para Projetos Acadêmicos.
+Repositório para um breve projetos acadêmico.
 O primeiro a ser desenvolvido vai ser um sistema desktop em Java Swing, integrado com uma página Web por meio de uma API REST.
 
 ### Arquitetura:
