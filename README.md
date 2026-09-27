@@ -1,8 +1,8 @@
 #   Sistema Desktop integrado com Web
 ###
-Repositório para um breve projetos acadêmico.
+Repositório para um breve projeto acadêmico, com meio de praticar a linguagem de programação Java, bem como entender como funcionam API'S.
 
-O primeiro a ser desenvolvido vai ser um sistema desktop em Java Swing, integrado com uma página Web por meio de uma API REST.
+O projeto a ser desenvolvido é um sistema desktop em Java Swing, integrado com uma página Web por meio de uma API REST, esse sistea vai receber login e senha a primeiro momento.
 
 ### Arquitetura:
 ```
