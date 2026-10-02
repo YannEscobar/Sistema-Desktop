@@ -32,10 +32,12 @@ Será utilizada nesse projeto uma API REST (Representational State Transfer), qu
 
 ### Estrutura Atual:
 ```
-Sistema-Desktop/
+SistemaProjetos/
 │
-├── src/
-│   └── Main.java
-│
-└── README.md
+└── App/src
+    │
+    ├── Main.java
+    │
+    └── model/
+        └── Projeto.java
 ```
