@@ -20,7 +20,7 @@ public class Projeto {
     }
 
     //Getter e Setters
-    //Como as variáveis são privates precisamos de getters e Setter
+    //Como as variáveis são privates precisamos de Getter's e Setter's
     ///////////////////////////////////////////////////////////////
 
     public int getId(){ //cria um metodo int público para 'puxar' um 'id'

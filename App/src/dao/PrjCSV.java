@@ -8,7 +8,7 @@ import java.util.List;
 import model.Projeto;
 
 public class PrjCSV {
-
+    // Essa clase vai tratar do gerenciamento de arquivos
     private Path caminho;
 
     public PrjCSV(){
