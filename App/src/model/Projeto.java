@@ -6,14 +6,12 @@ public class Projeto {
 
     private int id;
     private String nome, descricao, categoria,status;
-    //Cria uma série de variáveis para ser utilizado por outros métodos e classes
-
+    //Cria uma série de variáveis para ser utilizado por outros métodos e classes na criação de projetos
     public Projeto() {
     }
 
     public Projeto(int id, String nome, String descricao,
                    String categoria, String status) {
-
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
@@ -61,4 +59,20 @@ public class Projeto {
 
     public String getStatus(){ return status;    }
     public String setStatus(String status){ this.status = status; return status; }
+
+    /// ////////////////////////////////////////////////////////
+    // Função para atribuir conclusão:
+    public boolean statusCompleto() {
+        return status.equals("Concluído");
+    }
+
+
+    //Função para exibir dados
+    public void exbDados(){
+        System.out.println("ID: " + id);
+        System.out.println("Nome: " + nome);
+        System.out.println("Sobre: " + descricao);
+        System.out.println("Categoria: " + categoria);
+        System.out.println("Status: " + status);
+    }
 }

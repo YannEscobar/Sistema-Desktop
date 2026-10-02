@@ -1,8 +1,13 @@
 import model.Projeto;
 //Importa uma classe
 
+import service.PrjService;
+//Como visto no superior importa uma classe
+
+import dao.PrjCSV;
+
 public class Main{
-  public static void main(String[] args) {
+  public static void main(String[] args) throws Exception{
     System.out.println("======================");
     System.out.println("SISTEMA DESKTOP EM JAVA");
     System.out.println("======================");
@@ -23,10 +28,28 @@ public class Main{
             "Em desenvolvimento"
     );
 
-    System.out.println("Projeto 1 características: ");
-    System.out.println(projeto1.getNome());
-    System.out.println(projeto1.getDescricao());
-    System.out.println(projeto1.getCategoria());
-    System.out.println(projeto1.getStatus());
+    PrjService.adicionar(projeto1);
+
+    PrjCSV dao = new PrjCSV();
+
+    PrjService prjService1 = new PrjService(
+            0,
+            100,
+            "Otimização de código"
+    );
+
+    projeto1.exbDados();
+    if (projeto1.statusCompleto()){
+      System.out.println("O projeto está concluído, parabéns!");
+    }
+    else {
+      System.out.println("O projeto não está concluído :(");
+    }
+
+    projeto1.setStatus("Concluído");
+    projeto1.exbDados();
+    prjService1.exbServico();
+
+    dao.salvar(PrjService.listar());
   }
 }
