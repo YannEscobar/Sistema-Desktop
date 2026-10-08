@@ -20,6 +20,12 @@ public class Main{
     //Declaramos uma variável para armazenar um objeto Projeto: 'projeto'
     //Instacia-mos
 
+    PrjService service = new PrjService();
+    //Declaramos uma variável para armazenar um objeto PrjService: 'service'
+    //Instacia-mos
+
+    PrjCSV dao = new PrjCSV();
+
     Projeto projeto1 = new Projeto(
             1,
             "Sistema Acadêmico",
@@ -30,13 +36,6 @@ public class Main{
 
     PrjService.adicionar(projeto1);
 
-    PrjCSV dao = new PrjCSV();
-
-    PrjService prjService1 = new PrjService(
-            0,
-            100,
-            "Otimização de código"
-    );
 
     projeto1.exbDados();
     if (projeto1.statusCompleto()){
@@ -48,7 +47,7 @@ public class Main{
 
     projeto1.setStatus("Concluído");
     projeto1.exbDados();
-    prjService1.exbServico();
+    service.exbServico();
 
     dao.salvar(PrjService.listar());
   }

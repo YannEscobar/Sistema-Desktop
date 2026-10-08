@@ -34,10 +34,16 @@ Será utilizada nesse projeto uma API REST (Representational State Transfer), qu
 ```
 SistemaProjetos/
 │
-└── App/src
-    │
-    ├── Main.java
-    │
-    └── model/
-        └── Projeto.java
+├── src/
+│   │
+│   ├── Main.java
+│   │
+│   ├── model/
+│   │   └── Projeto.java
+│   │
+│   └── service/
+│       └── ProjetoService.java
+│
+└── dados/
+    └── projetos.csv
 ```
