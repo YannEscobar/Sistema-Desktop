@@ -41,9 +41,16 @@ SistemaProjetos/
 │   ├── model/
 │   │   └── Projeto.java
 │   │
-│   └── service/
-│       └── ProjetoService.java
-│
+│   ├── service/
+│   │    └── PrjService.java
+│   │
+│   ├──dao/
+│   │    └──PrjCSV
 └── dados/
-    └── projetos.csv
+    └── dados.csv
 ```
+### Sobre a Estrutura
+- Projeto.java - Trata da representação dos dados.
+- PrjService.java - Contém as regras de negócio.
+- PrjCSV.java - Classe que lida com a persistência.
+- Main - Interação com o usuário
