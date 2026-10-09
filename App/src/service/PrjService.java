@@ -3,15 +3,11 @@ package service;
 import dao.PrjCSV;
 import model.Projeto;
 
-private PrjCSV dao;
 import java.util.ArrayList;
 import java.util.List;
-import dao.PrjCSV;
-import model.Projeto;
 
 public class PrjService {
-
-    private List<Projeto> projetos;
+    private static List<Projeto> projetos;
 
     private PrjCSV dao;
 
@@ -24,7 +20,6 @@ public class PrjService {
 
     public void carregar()
             throws Exception {
-
         projetos = dao.listar();
 
     }
@@ -36,20 +31,13 @@ public class PrjService {
 
     }
 
-    public boolean adicionar(
-            Projeto projeto
-    ) {
-
+    public static boolean adicionar(Projeto projeto) {
         if (projeto.getNome() == null ||
                 projeto.getNome().isBlank() ) {
-
             return false;
-
         }
 
-        if (
-                buscarPorId(projeto.getId()) != null
-        ) {
+        if (buscarPorId(projeto.getId()) != null) {
 
             return false;
 
@@ -60,13 +48,40 @@ public class PrjService {
         return true;
     }
 
-    public List<Projeto> listar() {
+    public static List<Projeto> listar() {
 
         return projetos;
 
     }
 
-    public Projeto buscarPorId(int id) {
+    // Metodo para atualizar (alterar)
+
+    public boolean alterar(Projeto projeto){
+
+        Projeto projetoAtualizado = null;
+        Projeto projeto = buscarPorId(projetoAtualizado.getId());
+        // Primeiro procuramos pelo projeto
+
+        if (projeto == null) {
+            // Se projeto não existir (NULL) retornar falso
+            return false;
+        }
+
+        // Se o projeto existir podemos atualizar os dados
+
+        projeto.setNome(projetoAtualizado.getNome());
+        // A variável projetoAtualizado vai guardar os valores da atualização
+        projeto.setDescricao(projetoAtualizado.getDescricao());
+
+        projeto.setCategoria(projetoAtualizado.getCategoria());
+
+        // E depois, retornamos:
+        return true;
+
+    }
+
+
+    public static Projeto buscarPorId(int id) {
 
         for (Projeto projeto : projetos) {
 
@@ -77,9 +92,7 @@ public class PrjService {
         return null;
     }
 
-    public List<Projeto> buscarPorCategoria(
-            String categoria
-    ) {
+    public List<Projeto> buscarPorCategoria(String categoria) {
 
         List<Projeto> resultado =  new ArrayList<>();
 
@@ -119,74 +132,7 @@ public class PrjService {
 
         return false;
     }
-}
 
-
-
-public class PrjService {
-    private static List<Projeto> projetos;
-    //lista que armazena objetos do tipo 'Projeto'
-
-    private int idService, precoService;
-    private String nomeService;
-    //Cria uma série de variáveis para ser utilizado em objetos da classe Serviço
-
-        public PrjService(){
-            projetos = new ArrayList<>();
-            // Criação prática da lista que armazena obj's do tipo projeto
-        }
-
-
-        // Métodos que serão usados na criação de arquivos...
-        public static void adicionar(Projeto projeto) {
-            projetos.add(projeto);
-        }
-
-        public static List<Projeto> listar() {
-            // Cria um metodo 'listar' utilizando arraylist
-            for (Projeto projeto : PrjService.listar()) {
-                projeto.exbDados();
-                // Cria um loop que exibe os obj's projeto
-                // E exibe eles com o metodo 'exbDados'
-            }
-
-            return projetos;
-
-        }
-
-        public PrjService(int idService, int precoService, String nomeService){
-            this.idService = idService;
-            this.precoService = precoService;
-            this.nomeService = nomeService;
-        }
-    /// /////////////////////////////////////////
-    public int getIdService(){
-        return idService;
-    }
-    public int setIdService(int idService){
-        this.idService = idService;
-        return idService;
-    }
-
-    public int getPrecoService(){
-        return precoService;
-    }
-    public int setPrecoService(int precoService){
-        this.precoService = precoService;
-        return precoService;
-    }
-
-    public String getNomeService(){
-        return nomeService;
-    }
-    public String setNomeService(String nomeService){
-        this.nomeService = nomeService;
-        return nomeService;
-    }
-
-    public void exbServico(){
-        System.out.println("ID do Serviço: " + idService);
-        System.out.println("Nome: " + nomeService);
-        System.out.println("Preço: " + precoService);
+    public void exbServico() {
     }
 }

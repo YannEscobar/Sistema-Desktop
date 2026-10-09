@@ -50,5 +50,33 @@ public class Main{
     service.exbServico();
 
     dao.salvar(PrjService.listar());
+
+    // para fins de debug:
+
+    Projeto novo =
+            new Projeto(
+                    1,
+                    "Sistema Acadêmico 2.0",
+                    "Nova versão do sistema acadêmico",
+                    "Software",
+                    "Concluído"
+            );
+
+    boolean alterado = service.alterar(novo);
+
+    if (alterado) {
+
+      service.salvar();
+
+      System.out.println(
+              "Projeto alterado com sucesso."
+      );}
+    else {
+
+      System.out.println(
+              "Projeto não encontrado."
+      );
+    }
+
   }
 }
