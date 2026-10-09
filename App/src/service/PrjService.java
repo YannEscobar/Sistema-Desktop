@@ -135,4 +135,7 @@ public class PrjService {
 
     public void exbServico() {
     }
+
+    public void sala() {
+    }
 }
