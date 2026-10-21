@@ -32,8 +32,8 @@ public class PrjService {
     }
 
     public static boolean adicionar(Projeto projeto) {
-        if (projeto.getNome() == null ||
-                projeto.getNome().isBlank() ) {
+        if (projeto.getNome() == null || projeto.getNome().isBlank() ) {
+            // Se projeto pegar nome ou se não tiver nome retorna falso
             return false;
         }
 
@@ -42,29 +42,26 @@ public class PrjService {
             return false;
 
         }
-
         projetos.add(projeto);
 
         return true;
     }
 
     public static List<Projeto> listar() {
-
         return projetos;
-
     }
 
     // Metodo para atualizar (alterar)
 
-    public boolean alterar(Projeto projeto){
+    public boolean alterar(Projeto projetoAtualizado){
 
-        Projeto projetoAtualizado = null;
         Projeto projeto = buscarPorId(projetoAtualizado.getId());
         // Primeiro procuramos pelo projeto
 
         if (projeto == null) {
             // Se projeto não existir (NULL) retornar falso
             return false;
+            // Retorna falso se não existe
         }
 
         // Se o projeto existir podemos atualizar os dados
@@ -75,6 +72,8 @@ public class PrjService {
 
         projeto.setCategoria(projetoAtualizado.getCategoria());
 
+        projeto.setStatus(projetoAtualizado.getStatus());
+        // BRUH, esqueci do 'setStatus'
         // E depois, retornamos:
         return true;
 
@@ -93,16 +92,19 @@ public class PrjService {
     }
 
     public List<Projeto> buscarPorCategoria(String categoria) {
+        // Criamos uma lista vazia e depois percorremos...
 
         List<Projeto> resultado =  new ArrayList<>();
 
-        for (Projeto projeto : projetos) {
-            if (projeto.getCategoria().equalsIgnoreCase(categoria))
-            {
+        for (Projeto projeto : projetos){
+        // Laço para percorrer os projetos
+            if (projeto.getCategoria().equalsIgnoreCase(categoria)){
+            // Comparamos a categoria do obj projeto em questão no ciclo de execução e fazemos...
                 resultado.add(projeto);
+                // Adicionamos esse obj nessa variável "local" chamada 'resultado', ciclo reinicia
             }
         }
-
+        // Quando não há mais onj's para percorrer retorna-mos o resultado
         return resultado;
     }
 
@@ -111,7 +113,8 @@ public class PrjService {
         List<Projeto> resultado = new ArrayList<>();
 
         for (Projeto projeto : projetos) {
-            if (projeto.getStatus().equalsIgnoreCase(status)) {
+            if (projeto.getStatus().equalsIgnoreCase(status))
+            {
                 resultado.add(projeto);
             }
         }
@@ -129,13 +132,11 @@ public class PrjService {
 
             return true;
         }
-
         return false;
+        // Retorna false caso nada seja encontrado
     }
 
     public void exbServico() {
     }
 
-    public void sala() {
-    }
 }

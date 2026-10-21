@@ -27,7 +27,7 @@ public class PrjCSV {
         linhas.add("id;nome;descricao;categoria;status");
 
         for (Projeto projeto : projetos) {
-            // Um loop que percorre os projetos e adiciona ";" após cada índice
+            // Um loop que percorre os obj's projetos e adiciona ";" após cada índice
 
             String linha =
                     projeto.getId() + ";" +
@@ -47,7 +47,7 @@ public class PrjCSV {
         List<Projeto> projetos = new ArrayList<>();
 
         if (!Files.exists(caminho)) {
-
+            // Se arquivo não existir retorna lista vazia
             return projetos;
         }
 
@@ -57,7 +57,7 @@ public class PrjCSV {
         for (int i = 1; i < linhas.size(); i++) {
 
             String linha = linhas.get(i);
-
+            // Denomina uma variável 'linha' e atribui o valor dela ao índice de 'linhas'
             String[] dados =
                     linha.split(";");
 

@@ -6,7 +6,7 @@ import service.PrjService;
 
 import dao.PrjCSV;
 
-import java.sql.Struct;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main{
@@ -60,184 +60,157 @@ public class Main{
         );
 
         System.out.print("Escolha: ");
-    }
-
-    opcao = input.nextInt();
+      opcao = input.nextInt();
     // Recebe a entrada do usuário numa variável do tipo int
 
-    switch (opcao) {
-      case 1:
-        System.out.println(
-                "\n--- LISTA DE PROJETOS ---"
-        );
-
-        for (Projeto projeto : PrjService.listar()) {
-          projeto.exbDados();
-          System.out.println(
-                  "-------------------------"
-          );
-        }
-
-        break;
+      switch (opcao) {
+        case 1:
+            System.out.println(
+                  "\n--- LISTA DE PROJETOS ---");
+                  var Projetos =  PrjService.listar();
+                  if (Projetos.isEmpty())
+                  {
+                    System.out.println("Nenhum projeto cadastrado");
+                  }
+                  else {
+                    for (Projeto projetoLoop : PrjService.listar()) {
+                      projetoLoop.exbDados();
+                      System.out.println(
+                              "-------------------------"
+                      );
+                    }
+                  }
+          break;
 
         // Busca por projetos //
         case 2:
           System.out.println("Buscar projeto");
-          System.out.print("Qual o id do projeto?");
-          System.out.println("\n--- BUSCANDO ---");
+          System.out.println("Qual o id do projeto?");
 
           int IDbusca = input.nextInt();
           projeto = PrjService.buscarPorId(IDbusca);
 
-          if (projeto != null){
+          if (projeto != null) {
+            // Se projeto não for vazio retorna com o metodo de exibição
             projeto.exbDados();
-          }
-          else {
+          } else {
             System.out.println("Projeto não encontrado");
           }
           break;
 
-          // Cadastro de projetos
-          case 3:
-            System.out.println("Cadastrar projeto");
-            System.out.println("Atribua um ID ao seu novo projeto: ");
-            int id = input.nextInt();
-            input.nextLine();
+        // Cadastro de projetos
+        case 3:
+          System.out.println("Cadastrar projeto");
+          System.out.println("Atribua um ID ao seu novo projeto: ");
+          int id = input.nextInt();
+          input.nextLine();
 
-            System.out.print("Digite o nome do seu novo projeto: ");
-            String nome = input.nextLine();
+          System.out.print("Digite o nome do seu novo projeto: ");
+          String nome = input.nextLine();
 
-            System.out.print("Descrição do projeto");
-            String desc = input.nextLine();
+          System.out.print("Descrição do projeto");
+          String desc = input.nextLine();
 
-            System.out.print("Qual a categoria do seu novo projeto?");
-            String cat = input.nextLine();
+          System.out.print("Qual a categoria do seu novo projeto?");
+          String cat = input.nextLine();
 
-            System.out.print("Status de progressão do projeto");
-            String stats = input.nextLine();
+          System.out.print("Status de progressão do projeto");
+          String stats = input.nextLine();
 
-            // Criando um novo objeto:
-            Projeto projeto = new Projeto(id, nome, desc, cat, stats);
+          // Criando um novo objeto:
+          projeto = new Projeto(id, nome, desc, cat, stats);
 
-            boolean cadastrado = PrjService.adicionar(projeto);
+          boolean cadastrado = PrjService.adicionar(projeto);
 
-            if (cadastrado){
-              service.salvar();
-              System.out.println("Projeto salvo, parabéns!");
-            }
-            else {
-              System.out.println("Algo deu errado");
-            }
+          if (cadastrado) {
+            service.salvar();
+            System.out.println("Projeto salvo, parabéns!");
+          } else {
+            System.out.println("Algo deu errado");
+          }
 
+          break;
+
+        case 4:
+          System.out.println("Alterar projeto");
+          System.out.println("ID do projeto que você quer alterar");
+
+          int idAlterar = input.nextInt();
+          input.nextLine(); // Pula uma linha
+
+          Projeto existente = PrjService.buscarPorId(idAlterar);
+
+          if (existente == null) {
+            System.out.println("Projeto não encontrado!");
             break;
+          }
 
-            case 4:
-              System.out.println("Alterar projeto");
-              System.out.println("ID do projeto que você quer alterar");
+          System.out.println("\n Projeto atual:");
+          existente.exbDados();
 
-              int idAlterar = input.nextInt();
+          System.out.print("Novo nome: ");
+          nome = input.nextLine();
 
-              input.nextLine();
+          System.out.print("Nova descrição: ");
+          String descricao =
+                  input.nextLine();
 
-              Projeto existente = PrjService.buscarPorId(idAlterar);
+          System.out.print("Nova categoria: ");
+          String categoria =
+                  input.nextLine();
 
-              if (existente == null){
-                System.out.println("Projeto não encontrado!");
-                break;
-              }
+          System.out.print("Novo status: ");
+          String status =
+                  input.nextLine();
 
-              System.out.println("\n Projeto atual:");
-              existente.exbDados();
+          Projeto atualizado = new Projeto(idAlterar, nome, descricao, categoria, status);
 
-              System.out.print("Novo nome: ");
-              String nome = input.nextLine();
+          boolean alterado = service.alterar(atualizado);
 
-              System.out.print("Nova descrição: ");
-              String descricao =
-                      input.nextLine();
+          if (alterado) {
+            service.salvar();
+            System.out.println("Projeto alterado com sucesso.");
+          } else {
+            System.out.println("Não foi possível alterar, verifique se esse projeto existe e tente de novo!");
+          }
+          break;
 
-              System.out.print("Nova categoria: ");
-              String categoria =
-                      input.nextLine();
+        case 5:
+          System.out.println("Excluir projeto");
+          System.out.print("Qual o ID do projeto que você quer excluir?");
+          int idExcluir = input.nextInt();
+          projeto = service.buscarPorId(idExcluir);
 
-              System.out.print("Novo status: ");
-              String status =
-                      input.nextLine();
+          if (projeto == null) {
+            System.out.print("Projeto não encontrado");
+            break;
+          }
 
-              Projeto atualizado = new Projeto(idAlterar,nome,descricao,categoria,status);
+          projeto.exbDados();
+          System.out.println("Tem certeza que quer EXCLUIR esse projeto? (S/N)");
+          input.nextLine();
+          String confirmacao = input.nextLine();
 
-              boolean alterado = service.alterar(atualizado);
+          if (confirmacao.equalsIgnoreCase("S")) {
+            boolean removido = service.removerPorId(idExcluir);
+            if (removido) {
+              service.salvar();
+              System.out.println("Projeto Excluído com sucesso");
+            }
+          } else {
+            System.out.println("Operação de exclusão cancelada");
+          }
 
-              if (alterado) {
-                service.salvar();
-                System.out.println("Projeto alterado com sucesso.");
-              }
-              else {
-                System.out.println("Não foi possível alterar.");
-              }
+          break;
 
-              break;
+        case 0:
+          System.out.println("Encerrando...");
+          break;
 
-      case 5:
-        System.out.println("Excluir projeto");
-        break;
-
-      case 0:
-        System.out.println("Encerrando...");
-        break;
-
-      default:
-        System.out.println("Opção inválida.");
+        default:
+          System.out.println("Opção inválida.");
+      }
     }
-
-
-
-
-    Projeto projeto1 = new Projeto(1,"Sistema Acadêmico","Sistema para gerenciamento acadêmico","Software","Em desenvolvimento");
-    PrjService.adicionar(projeto1);
-
-
-
-    projeto1.exbDados();
-    if (projeto1.statusCompleto()){
-      System.out.println("O projeto está concluído, parabéns!");
-    }
-    else {
-      System.out.println("O projeto não está concluído :(");
-    }
-
-    projeto1.setStatus("Concluído");
-    projeto1.exbDados();
-    service.exbServico();
-
-    dao.salvar(PrjService.listar());
-
-    // para fins de debug:
-
-    Projeto novo =
-            new Projeto(
-                    1,
-                    "Sistema Acadêmico 2.0",
-                    "Nova versão do sistema acadêmico",
-                    "Software",
-                    "Concluído"
-            );
-
-    boolean alterado = service.alterar(novo);
-
-    if (alterado) {
-
-      service.salvar();
-
-      System.out.println(
-              "Projeto alterado com sucesso."
-      );}
-    else {
-
-      System.out.println(
-              "Projeto não encontrado."
-      );
-    }
-
+    input.close();
   }
 }
