@@ -1,7 +1,9 @@
 package dao;
 
+import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,11 +16,17 @@ public class PrjCSV {
     public PrjCSV(){
         caminho = Path.of("dados/projetos.csv");
     }
-
-
-    public void salvar(List<Projeto> projetos)
+    public void salvar(List<Projeto> projetos) throws Exception {
     // Metodo para salvar, utilizando como parâmetro uma lista de objetos do tipo projeto
-            throws Exception {
+
+        //----Tratamento de erros caso a pasta ou arquivo não existir--------//
+        Path caminhoPasta = Paths.get("dados");
+        if (!Files.exists(caminhoPasta)){
+            Files.createDirectory(caminhoPasta);
+        }
+        if (!Files.exists(caminho)){
+            Files.createFile(caminho);
+        }
 
         List<String> linhas =  new ArrayList<>();
         // Cria e instancia uma variável chamada 'linhas' como uma nova arraylist

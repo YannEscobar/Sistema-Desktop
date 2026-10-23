@@ -104,7 +104,7 @@ public class PrjService {
                 // Adicionamos esse obj nessa variável "local" chamada 'resultado', ciclo reinicia
             }
         }
-        // Quando não há mais onj's para percorrer retorna-mos o resultado
+        // Quando não há mais obj's para percorrer retornamos o resultado
         return resultado;
     }
 

@@ -19,6 +19,9 @@ public class Projeto {
         this.status = status;
     }
 
+    public Projeto(String nome, String descricao, String categoria, String status) {
+    }
+
     //Getter e Setters
     //Como as variáveis são privates precisamos de Getter's e Setter's
     ///////////////////////////////////////////////////////////////
